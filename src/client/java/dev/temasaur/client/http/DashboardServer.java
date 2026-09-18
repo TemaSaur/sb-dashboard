@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
+import dev.temasaur.client.state.providers.StateProvider;
+import dev.temasaur.client.state.providers.PlayerStateProvider;
+
 public class DashboardServer {
   private final Logger logger;
   private final HttpServer server;
@@ -45,6 +48,8 @@ public class DashboardServer {
   }
 
   private static String buildStateJson() {
-    return "{\"status\":\"ok\"}";
+    StateProvider playerState = new PlayerStateProvider();
+    int xpLevel = (int) playerState.collect();
+    return String.format("{\"status\":\"ok\",\"xp_level\":%d}", xpLevel);
   }
 }
