@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import org.slf4j.Logger;
 
@@ -11,6 +12,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 import dev.temasaur.client.state.providers.StateProvider;
+import dev.temasaur.client.json.JsonWriter;
 import dev.temasaur.client.state.providers.PlayerStateProvider;
 
 public class DashboardServer {
@@ -49,7 +51,11 @@ public class DashboardServer {
 
   private static String buildStateJson() {
     StateProvider playerState = new PlayerStateProvider();
-    int xpLevel = (int) playerState.collect();
-    return String.format("{\"status\":\"ok\",\"xp_level\":%d}", xpLevel);
+
+    Map<?, ?> result = Map.of(
+        "status", "ok",
+        playerState.key(), playerState.collect());
+
+    return JsonWriter.write(result);
   }
 }
