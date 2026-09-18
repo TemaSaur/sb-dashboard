@@ -1,5 +1,8 @@
 package dev.temasaur.client.state.providers;
 
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 
@@ -12,12 +15,15 @@ public class PlayerStateProvider implements StateProvider {
 
   @Override
   public String key() {
-    return "xpLevel";
+    return "playerState";
   }
 
   @Override
   public Object collect() {
     LocalPlayer player = client.player;
-    return player.experienceLevel;
+    return Map.of(
+        "xpLevel", player.experienceLevel,
+        "coordinates", List.of(player.getX(), player.getY(), player.getZ()),
+        "active items count", player.getActiveItem().count());
   }
 }

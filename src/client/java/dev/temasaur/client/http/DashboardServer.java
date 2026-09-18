@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 import org.slf4j.Logger;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
-import dev.temasaur.client.state.providers.StateProvider;
 import dev.temasaur.client.json.JsonWriter;
-import dev.temasaur.client.state.providers.PlayerStateProvider;
+import dev.temasaur.client.state.DashboardState;
+import dev.temasaur.client.state.StateCollector;
 
 public class DashboardServer {
   private final Logger logger;
@@ -50,12 +49,8 @@ public class DashboardServer {
   }
 
   private static String buildStateJson() {
-    StateProvider playerState = new PlayerStateProvider();
+    DashboardState result = StateCollector.collect();
 
-    Map<?, ?> result = Map.of(
-        "status", "ok",
-        playerState.key(), playerState.collect());
-
-    return JsonWriter.write(result);
+    return JsonWriter.write(result.data());
   }
 }
