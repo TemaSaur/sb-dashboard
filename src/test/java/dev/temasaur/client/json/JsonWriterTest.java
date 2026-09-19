@@ -3,6 +3,8 @@ package dev.temasaur.client.json;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,5 +127,18 @@ public class JsonWriterTest {
   void shouldEscapeStringsInsideMaps() {
     assertEquals("{\"msg\":\"say \\\"hi\\\"\"}",
         JsonWriter.write(Map.of("msg", "say \"hi\"")));
+  }
+
+  @Test
+  void shouldSerializeWithNullValues() {
+    Map<String, Object> inputMap = new HashMap<>();
+    inputMap.put("key", null);
+    assertEquals("{\"key\":null}", JsonWriter.write(inputMap));
+
+    List<Object> inputList = new ArrayList<>();
+    inputList.add(1);
+    inputList.add(null);
+    inputList.add(3);
+    assertEquals("[1,null,3]", JsonWriter.write(inputList));
   }
 }

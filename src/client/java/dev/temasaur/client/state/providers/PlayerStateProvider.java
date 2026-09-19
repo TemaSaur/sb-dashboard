@@ -21,6 +21,8 @@ public class PlayerStateProvider implements StateProvider {
   @Override
   public Object collect() {
     LocalPlayer player = client.player;
+    if (player == null)
+      return null;
     return Map.of(
         "xpLevel", player.experienceLevel,
         "coordinates", List.of(player.getX(), player.getY(), player.getZ()),
