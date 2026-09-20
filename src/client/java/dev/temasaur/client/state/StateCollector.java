@@ -4,12 +4,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import dev.temasaur.client.state.providers.JacobsStateProvider;
 import dev.temasaur.client.state.providers.PlayerStateProvider;
 import dev.temasaur.client.state.providers.StateProvider;
 
 public class StateCollector {
   private final static List<StateProvider> PROVIDERS = List.of(
-      new PlayerStateProvider());
+      new PlayerStateProvider(),
+      new JacobsStateProvider());
 
   public static DashboardState collect() {
     Map<String, Object> data = new LinkedHashMap<>();

@@ -15,7 +15,7 @@ public class PlayerStateProvider implements StateProvider {
 
   @Override
   public String key() {
-    return "playerState";
+    return "player";
   }
 
   @Override

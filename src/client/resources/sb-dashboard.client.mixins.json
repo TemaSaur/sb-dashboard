@@ -3,6 +3,7 @@
 	"package": "dev.temasaur.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
+    "PlayerTabOverlayAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
