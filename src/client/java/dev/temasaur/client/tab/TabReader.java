@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,21 +19,6 @@ public class TabReader {
   private static final Minecraft CLIENT = Minecraft.getInstance();
 
   private TabReader() {
-  }
-
-  public static List<Matcher> getTabLinesRegex(Pattern pattern) {
-    List<String> lines = getTabLines();
-    ArrayList<Matcher> result = new ArrayList<>();
-
-    for (String line : lines) {
-      Matcher matcher = pattern.matcher(line);
-      if (!matcher.matches())
-        continue;
-
-      result.add(matcher);
-    }
-
-    return result;
   }
 
   public static List<String> getTabLines() {

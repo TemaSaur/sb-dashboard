@@ -7,11 +7,13 @@ import java.util.Map;
 import dev.temasaur.client.state.providers.JacobsStateProvider;
 import dev.temasaur.client.state.providers.PlayerStateProvider;
 import dev.temasaur.client.state.providers.StateProvider;
+import dev.temasaur.client.state.providers.TabLinesStateProvider;
 
 public class StateCollector {
   private final static List<StateProvider> PROVIDERS = List.of(
       new PlayerStateProvider(),
-      new JacobsStateProvider());
+      new JacobsStateProvider(),
+      new TabLinesStateProvider());
 
   public static DashboardState collect() {
     Map<String, Object> data = new LinkedHashMap<>();
