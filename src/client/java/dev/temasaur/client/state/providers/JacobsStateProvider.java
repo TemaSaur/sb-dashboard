@@ -14,10 +14,11 @@ import dev.temasaur.client.tab.TabReader;
 public class JacobsStateProvider implements StateProvider {
   private static final Logger LOGGER = LoggerFactory.getLogger("sb-dashboard");
 
-  public static final Pattern CROP_TOP = Pattern.compile(".*?(\\w+)\\s*◆\\s*Top\\s*([\\d.]+)%");
-  public static final Pattern MEDAL_AMOUNT = Pattern.compile("\\s*(\\w+)\\s+with\\s+([\\d,]+)");
-  public static final Pattern BELOW = Pattern.compile("\\s*([\\d,]+)\\s+below\\s+(\\w+)");
-  public static final Pattern OVER = Pattern.compile("\\s*([\\d,]+)\\s+over\\s+([\\w ]+)");
+  // TODO: edge cases (before refreshing results and such)
+  private static final Pattern CROP_TOP = Pattern.compile(".*?(\\w+)\\s*◆\\s*Top\\s*([\\d.]+)%");
+  private static final Pattern MEDAL_AMOUNT = Pattern.compile("\\s*(\\w+)\\s+with\\s+([\\d,]+)");
+  private static final Pattern BELOW = Pattern.compile("\\s*([\\d,]+)\\s+below\\s+(\\w+)");
+  private static final Pattern OVER = Pattern.compile("\\s*([\\d,]+)\\s+over\\s+([\\w ]+)");
 
   @Override
   public String key() {
